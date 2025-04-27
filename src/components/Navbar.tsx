@@ -1,8 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useScroll } from '@/context/ScrollContext';
-import { ShoppingCart, Menu, X, Search } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import CartDrawer from './CartDrawer';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 
 const Navbar = () => {
   const { currentTheme } = useScroll();
@@ -36,17 +38,31 @@ const Navbar = () => {
           <a href="#theme1" className={`nav-link ${themeClass}`}>Home</a>
           <a href="#theme2" className={`nav-link ${themeClass}`}>Collection</a>
           <a href="#theme3" className={`nav-link ${themeClass}`}>Featured</a>
-          <a href="#theme4" className={`nav-link ${themeClass}`}>Shop</a>
+          
+          <HoverCard>
+            <HoverCardTrigger>
+              <a href="#theme4" className={`nav-link ${themeClass}`}>Shop</a>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-56 bg-black/90 border-white/10 text-white">
+              <div className="space-y-2">
+                <h3 className="font-medium">Shop Categories</h3>
+                <ul className="space-y-1 text-sm">
+                  <li><a href="#theme4" className="hover:text-theme4">All Products</a></li>
+                  <li><a href="#theme4" className="hover:text-theme4">Casual</a></li>
+                  <li><a href="#theme4" className="hover:text-theme4">Premium</a></li>
+                  <li><a href="#theme4" className="hover:text-theme4">Luxury</a></li>
+                </ul>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
         </div>
 
         <div className="flex items-center space-x-4">
           <Button variant="ghost" size="icon" className={`${themeClass} hover:bg-white/10`}>
             <Search className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" className={`${themeClass} hover:bg-white/10`}>
-            <ShoppingCart className="h-5 w-5" />
-            <span className="absolute -top-1 -right-1 bg-white text-black rounded-full w-4 h-4 text-xs flex items-center justify-center">0</span>
-          </Button>
+          
+          <CartDrawer />
           
           {/* Mobile menu button */}
           <Button 

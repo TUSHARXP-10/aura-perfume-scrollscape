@@ -6,8 +6,7 @@ interface ScrollContextType {
   scrollDirection: 'up' | 'down' | null;
   scrollProgress: number;
   bottleState: 'closed' | 'open' | 'spraying';
-  perspective: number;
-  rotation: { x: number; y: number };
+  cartItems: number;
 }
 
 const ScrollContext = createContext<ScrollContextType>({
@@ -15,8 +14,7 @@ const ScrollContext = createContext<ScrollContextType>({
   scrollDirection: null,
   scrollProgress: 0,
   bottleState: 'closed',
-  perspective: 1000,
-  rotation: { x: 0, y: 0 },
+  cartItems: 0,
 });
 
 interface ScrollProviderProps {
@@ -29,8 +27,7 @@ export const ScrollProvider: React.FC<ScrollProviderProps> = ({ children }) => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [bottleState, setBottleState] = useState<'closed' | 'open' | 'spraying'>('closed');
-  const [perspective, setPerspective] = useState(1000);
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [cartItems, setCartItems] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,15 +43,6 @@ export const ScrollProvider: React.FC<ScrollProviderProps> = ({ children }) => {
         setScrollDirection('up');
       }
       setLastScrollTop(currentScrollTop);
-      
-      // Calculate 3D effects based on scroll
-      const rotationX = (currentScrollTop / window.innerHeight) * 20;
-      const rotationY = Math.sin(currentScrollTop / 1000) * 10;
-      setRotation({ x: rotationX, y: rotationY });
-      
-      // Adjust perspective based on scroll position
-      const newPerspective = 1000 + (currentScrollTop * 0.5);
-      setPerspective(newPerspective);
       
       // Determine current theme and bottle state
       const windowHeight = window.innerHeight;
@@ -78,18 +66,27 @@ export const ScrollProvider: React.FC<ScrollProviderProps> = ({ children }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
 
+  // Context value with addToCart function
+  const contextValue = {
+    currentTheme,
+    scrollDirection,
+    scrollProgress,
+    bottleState,
+    cartItems,
+    addToCart: () => setCartItems(prev => prev + 1),
+  };
+
   return (
-    <ScrollContext.Provider value={{ 
-      currentTheme, 
-      scrollDirection, 
-      scrollProgress, 
-      bottleState,
-      perspective,
-      rotation
-    }}>
+    <ScrollContext.Provider value={contextValue}>
       {children}
     </ScrollContext.Provider>
   );
 };
 
-export const useScroll = () => useContext(ScrollContext);
+export const useScroll = () => {
+  const context = useContext(ScrollContext);
+  if (!context) {
+    throw new Error('useScroll must be used within ScrollProvider');
+  }
+  return context;
+};

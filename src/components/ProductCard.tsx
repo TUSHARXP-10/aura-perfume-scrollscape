@@ -4,14 +4,25 @@ import { Product } from '@/data/products';
 import { Button } from '@/components/ui/button';
 import { useScroll } from '@/context/ScrollContext';
 import { ShoppingCart, Heart } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { currentTheme } = useScroll();
+  const { currentTheme, addToCart } = useScroll();
+  const { toast } = useToast();
   const themeClass = `theme${currentTheme}`;
+  
+  const handleAddToCart = () => {
+    addToCart();
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+      variant: "default",
+    });
+  };
 
   return (
     <div className={`product-card group ${themeClass}`}>
@@ -46,7 +57,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <Button size="sm" variant="ghost" className="p-1 hover:bg-white/10">
             <Heart className="h-5 w-5" />
           </Button>
-          <Button size="sm" className={`bg-theme${currentTheme} hover:bg-theme${currentTheme}/80 text-white`}>
+          <Button 
+            size="sm" 
+            className={`bg-theme${currentTheme} hover:bg-theme${currentTheme}/80 text-white`}
+            onClick={handleAddToCart}
+          >
             <ShoppingCart className="h-4 w-4 mr-1" /> Add to Cart
           </Button>
         </div>
