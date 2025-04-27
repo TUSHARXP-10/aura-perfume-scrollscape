@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Our theme colors
+				theme1: '#8B5CF6', // Purple/violet
+				theme2: '#0EA5E9', // Teal/cyan
+				theme3: '#D946EF', // Rose/magenta
+				theme4: '#F97316', // Amber/gold
+				dark: '#0A0A0A',   // Rich black
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -70,25 +77,45 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'glow': {
+					'0%, 100%': { 
+						filter: 'drop-shadow(0 0 5px var(--glow-color))'
 					},
-					to: {
-						height: '0'
+					'50%': { 
+						filter: 'drop-shadow(0 0 20px var(--glow-color))' 
 					}
-				}
+				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'glow': 'glow 3s ease-in-out infinite',
+				'spin-slow': 'spin-slow 20s linear infinite',
+				'fade-in': 'fade-in 0.5s ease-out forwards'
+			},
+			fontFamily: {
+				'sans': ['Montserrat', 'sans-serif'],
+				'serif': ['Playfair Display', 'serif']
 			}
 		}
 	},
