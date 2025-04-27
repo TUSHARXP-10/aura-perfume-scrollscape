@@ -6,6 +6,8 @@ interface ScrollContextType {
   scrollDirection: 'up' | 'down' | null;
   scrollProgress: number;
   bottleState: 'closed' | 'open' | 'spraying';
+  perspective: number;
+  rotation: { x: number; y: number };
 }
 
 const ScrollContext = createContext<ScrollContextType>({
@@ -13,6 +15,8 @@ const ScrollContext = createContext<ScrollContextType>({
   scrollDirection: null,
   scrollProgress: 0,
   bottleState: 'closed',
+  perspective: 1000,
+  rotation: { x: 0, y: 0 },
 });
 
 interface ScrollProviderProps {
@@ -25,6 +29,8 @@ export const ScrollProvider: React.FC<ScrollProviderProps> = ({ children }) => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [bottleState, setBottleState] = useState<'closed' | 'open' | 'spraying'>('closed');
+  const [perspective, setPerspective] = useState(1000);
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,10 +47,19 @@ export const ScrollProvider: React.FC<ScrollProviderProps> = ({ children }) => {
       }
       setLastScrollTop(currentScrollTop);
       
-      // Determine current theme based on scroll position
+      // Calculate 3D effects based on scroll
+      const rotationX = (currentScrollTop / window.innerHeight) * 20;
+      const rotationY = Math.sin(currentScrollTop / 1000) * 10;
+      setRotation({ x: rotationX, y: rotationY });
+      
+      // Adjust perspective based on scroll position
+      const newPerspective = 1000 + (currentScrollTop * 0.5);
+      setPerspective(newPerspective);
+      
+      // Determine current theme and bottle state
       const windowHeight = window.innerHeight;
       const totalHeight = document.documentElement.scrollHeight;
-      const sectionCount = 4; // Number of theme sections
+      const sectionCount = 4;
       
       const section = Math.floor((currentScrollTop / (totalHeight - windowHeight)) * sectionCount) + 1;
       setCurrentTheme(Math.max(1, Math.min(section, sectionCount)));
@@ -64,7 +79,14 @@ export const ScrollProvider: React.FC<ScrollProviderProps> = ({ children }) => {
   }, [lastScrollTop]);
 
   return (
-    <ScrollContext.Provider value={{ currentTheme, scrollDirection, scrollProgress, bottleState }}>
+    <ScrollContext.Provider value={{ 
+      currentTheme, 
+      scrollDirection, 
+      scrollProgress, 
+      bottleState,
+      perspective,
+      rotation
+    }}>
       {children}
     </ScrollContext.Provider>
   );

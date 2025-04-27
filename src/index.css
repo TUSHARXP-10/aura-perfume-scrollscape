@@ -75,6 +75,8 @@
 @layer components {
   .theme-section {
     @apply min-h-screen w-full relative overflow-hidden flex flex-col justify-center items-center py-20 transition-all duration-1000;
+    transform-style: preserve-3d;
+    perspective-origin: center center;
   }
 
   .theme1 {
@@ -105,11 +107,13 @@
 
   .product-card {
     @apply relative overflow-hidden rounded-lg bg-black/50 backdrop-blur-sm border border-white/10 p-4 transition-all duration-300;
+    transform-style: preserve-3d;
   }
 
   .product-card:hover {
     @apply scale-[1.02] shadow-lg;
     box-shadow: 0 0 20px var(--glow-color);
+    transform: translateZ(20px);
   }
 
   .nav-link {
@@ -131,5 +135,7 @@
   .animated-bg {
     @apply absolute inset-0 -z-10;
     background: radial-gradient(circle at 50% 50%, rgba(26, 26, 26, 0.8) 0%, rgb(10, 10, 10) 100%);
+    transform: translateZ(-50px);
+    filter: blur(8px);
   }
 }
