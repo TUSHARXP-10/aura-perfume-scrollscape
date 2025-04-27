@@ -1,8 +1,9 @@
-
 import React from 'react';
 import { ScrollProvider } from '@/context/ScrollContext';
 import Navbar from '@/components/Navbar';
 import ThemeSection from '@/components/ThemeSection';
+import HeroSection from '@/components/HeroSection';
+import CollectionSection from '@/components/CollectionSection';
 import PerfumeBottle from '@/components/PerfumeBottle';
 import ProductCard from '@/components/ProductCard';
 import { 
@@ -45,163 +46,12 @@ const Index = () => {
 
         {/* Theme 1: Home / Hero */}
         <ThemeSection id="theme1" themeNumber={1}>
-          <div className="flex flex-col md:flex-row min-h-screen items-center">
-            <motion.div 
-              className="flex-1 text-center md:text-left mb-10 md:mb-0 pt-20 md:pt-0"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{
-                hidden: { opacity: 0, x: -50 },
-                visible: { opacity: 1, x: 0 }
-              }}
-            >
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif mb-6 theme1 glow-text">
-                Experience the Essence of <span className="block">Luxury</span>
-              </h1>
-              <p className="text-gray-300 mb-8 max-w-md mx-auto md:mx-0">
-                Discover our exclusive collection of premium fragrances that capture the essence of elegance and sophistication.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Button className="theme1 bg-theme1/20 hover:bg-theme1/40 border border-theme1 text-white px-8 py-6">
-                  Explore Collection
-                </Button>
-                <Button variant="outline" className="theme1 border-theme1 text-white hover:bg-theme1/20 px-8 py-6">
-                  Learn More
-                </Button>
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="flex-1 flex justify-center items-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <PerfumeBottle className="scale-150 mb-10" />
-            </motion.div>
-          </div>
-          
-          <motion.div 
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <ArrowDown className="h-8 w-8 theme1 glow-text" />
-          </motion.div>
+          <HeroSection />
         </ThemeSection>
 
         {/* Theme 2: Collection */}
         <ThemeSection id="theme2" themeNumber={2}>
-          <div className="py-20">
-            <motion.div
-              className="text-center mb-16"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeIn}
-            >
-              <h2 className="text-4xl md:text-5xl font-serif mb-4 theme2 glow-text">Our Collection</h2>
-              <p className="text-gray-300 max-w-2xl mx-auto">
-                Explore our carefully curated selection of fragrances, designed for every occasion and personality.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              <motion.div 
-                className="relative overflow-hidden rounded-lg aspect-square group"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeIn}
-                transition={{ delay: 0.1 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10"></div>
-                <div className="absolute inset-0 bg-theme2/20 group-hover:bg-theme2/40 transition-all duration-500"></div>
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Casual Collection" 
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute bottom-0 left-0 p-6 z-20">
-                  <h3 className="text-2xl font-serif theme2 glow-text mb-2">Casual</h3>
-                  <p className="text-gray-200 mb-4">Everyday fragrances for every moment</p>
-                  <Button className="theme2 bg-theme2/20 hover:bg-theme2/40 border border-theme2">
-                    Discover <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="relative overflow-hidden rounded-lg aspect-square group"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeIn}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10"></div>
-                <div className="absolute inset-0 bg-theme2/20 group-hover:bg-theme2/40 transition-all duration-500"></div>
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Premium Collection" 
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute bottom-0 left-0 p-6 z-20">
-                  <h3 className="text-2xl font-serif theme2 glow-text mb-2">Premium</h3>
-                  <p className="text-gray-200 mb-4">Elevated scents for special occasions</p>
-                  <Button className="theme2 bg-theme2/20 hover:bg-theme2/40 border border-theme2">
-                    Discover <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="relative overflow-hidden rounded-lg aspect-square group"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeIn}
-                transition={{ delay: 0.3 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10"></div>
-                <div className="absolute inset-0 bg-theme2/20 group-hover:bg-theme2/40 transition-all duration-500"></div>
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Luxury Collection" 
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute bottom-0 left-0 p-6 z-20">
-                  <h3 className="text-2xl font-serif theme2 glow-text mb-2">Luxury</h3>
-                  <p className="text-gray-200 mb-4">Exclusive fragrances for the connoisseur</p>
-                  <Button className="theme2 bg-theme2/20 hover:bg-theme2/40 border border-theme2">
-                    Discover <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-
-            <motion.div
-              className="flex justify-center"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {featuredProducts.map((product, index) => (
-                  <motion.div 
-                    key={product.id}
-                    variants={fadeIn}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <ProductCard product={product} />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+          <CollectionSection />
         </ThemeSection>
 
         {/* Theme 3: Featured */}

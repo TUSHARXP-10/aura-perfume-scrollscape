@@ -18,7 +18,7 @@ const ThemeSection: React.FC<ThemeSectionProps> = ({ id, themeNumber, children }
       className={`theme-section theme${themeNumber}`}
       style={{
         perspective: `${perspective}px`,
-        transform: `rotateX(${rotation.x * 0.1}deg) rotateY(${rotation.y * 0.1}deg)`,
+        transform: `rotateX(${rotation.x * 0.15}deg) rotateY(${rotation.y * 0.15}deg)`,
       }}
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
@@ -32,11 +32,14 @@ const ThemeSection: React.FC<ThemeSectionProps> = ({ id, themeNumber, children }
           transformStyle: 'preserve-3d',
         }}
         whileInView={{ 
-          z: [0, 50, 0],
-          rotateX: [0, rotation.x * 0.05, 0],
-          rotateY: [0, rotation.y * 0.05, 0],
+          z: [0, 100, 0],
+          rotateX: [0, rotation.x * 0.1, 0],
+          rotateY: [0, rotation.y * 0.1, 0],
         }}
-        transition={{ duration: 1.2 }}
+        transition={{ 
+          duration: 1.5,
+          ease: "easeInOut"
+        }}
       >
         {children}
       </motion.div>
