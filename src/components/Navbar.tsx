@@ -27,7 +27,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
           <a href="#" className={`text-2xl font-serif font-bold ${themeClass}`}>
-            <span className="glow-text">AURA</span>
+            <span className="glow-text">RAZA-PERFUME</span>
           </a>
         </div>
 

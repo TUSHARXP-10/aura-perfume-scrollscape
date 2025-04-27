@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -79,19 +78,19 @@
   }
 
   .theme1 {
-    --glow-color: #8B5CF6;
+    --glow-color: #FF6B6B; /* Coral Red */
   }
 
   .theme2 {
-    --glow-color: #0EA5E9;
+    --glow-color: #4ECDC4; /* Turquoise */
   }
 
   .theme3 {
-    --glow-color: #D946EF;
+    --glow-color: #FFD93D; /* Gold */
   }
 
   .theme4 {
-    --glow-color: #F97316;
+    --glow-color: #9B5DE5; /* Purple */
   }
 
   .glow-text {
