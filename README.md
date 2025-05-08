@@ -1,8 +1,7 @@
-# Welcome to your Lovable project
+# Welcome 
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/86304651-d0d1-4349-b9e9-982926420cc7
 
 ## How can I edit this code?
 
@@ -62,7 +61,7 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/86304651-d0d1-4349-b9e9-982926420cc7) and click on Share -> Publish.
+
 
 ## Can I connect a custom domain to my Lovable project?
 
